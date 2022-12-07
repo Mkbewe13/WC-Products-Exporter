@@ -1,0 +1,13 @@
+{
+    "name": "mkbewe13/wc-products-exporter",
+    "type": "wordpress-plugin",
+    "version": "0.1.0",
+    "require": {
+        "league/csv": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "VouchersFSO\\": "inc/"
+        }
+    }
+}
