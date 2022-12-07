@@ -25,5 +25,6 @@ add_action('admin_menu', 'create_products_submenu');
  * Callback for the products csv import submenu page.
  */
 function wc_products_export_submenu_callback() {
- //   ProductDataService::get_prepared_products_data();
+    $csv_exporter = new \WCProductsExporter\CSV\CSVExport();
+    $csv_exporter->getCSVFile();
 }
