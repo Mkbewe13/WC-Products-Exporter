@@ -23,7 +23,20 @@ class WC_Products_Exporter
 
     public function init()
     {
+        include_once('inc/woocommerce.php');
+        $this->includeClasses();
+        $this->includeServices();
         register_activation_hook(__FILE__, [$this, 'activation']);
+    }
+
+    private function includeClasses()
+    {
+        include_once('inc/CSV/CSVExport.php');
+    }
+
+    private function includeServices()
+    {
+        include_once('inc/Service/ProductDataService.php');
     }
 
 
@@ -59,6 +72,8 @@ class WC_Products_Exporter
             die('WC Products Exporter requires at least Wordpress 6.1');
         }
     }
+
+
 }
 
 $wcProductsExporter = new WC_Products_Exporter();
