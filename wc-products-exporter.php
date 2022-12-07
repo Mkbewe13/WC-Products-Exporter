@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     WC Products Exporter
  * Description:     Exports woocommerce products in csv file
- * Author:          Mkbewe13
+ * Author:          Jakub Owczarek
  * Text Domain:     WPE
  * Version:         0.1
  */
@@ -55,7 +55,7 @@ class WC_Products_Exporter
             die('WC Products Exporter requires an active Woocommerce plugin.');
         }
 
-        if ( version_compare( WC_VERSION, self::MIMIMUM_WOOCOMMERCE_VERSION, '<' ) ) {
+        if ( defined('WC_VERSION') && version_compare( WC_VERSION, self::MIMIMUM_WOOCOMMERCE_VERSION, '<' ) ) {
             die('WC Products Exporter requires at least Woocommerce 7.1');
         }
     }
