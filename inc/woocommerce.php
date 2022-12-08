@@ -23,8 +23,34 @@ function create_products_submenu(){
 add_action('admin_menu', 'create_products_submenu');
 /**
  * Callback for the products csv import submenu page.
+ *
+ * @since x.x.x
  */
-function wc_products_export_submenu_callback() {
+function wc_products_export_submenu_callback()
+{
     $csv_exporter = new \WCProductsExporter\CSV\CSVExport();
-    $csv_exporter->getCSVFile();
+    try {
+        $csv_exporter->getCSVFile();
+    } catch (Exception|\League\Csv\Exception $e) {
+        wp_safe_redirect(admin_url('?csv_failed=1'));
+    }
+
 }
+
+/**
+ * Display erron notice in admin panel after redirecting if something went wrong with csv export
+ *
+ * @return void
+ *
+ * @since x.x.x
+ */
+function product_export_failed_error_display()
+{
+    if(!empty($_GET['csv_failed']) && $_GET['csv_failed'] == 1){
+        echo '<div class="notice notice-error is-dismissible">
+             <p>Something went wrong with generating the product export csv file. Try again.</p>
+         </div>';
+    }
+
+}
+add_action('admin_notices', 'product_export_failed_error_display');
